@@ -1,0 +1,275 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Markets — Predikt</title>
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" />
+  <link rel="stylesheet" href="css/style.css" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
+</head>
+<body>
+
+  <!-- ===================== NAVBAR ===================== -->
+  <nav class="navbar-custom">
+    <div class="container">
+      <div class="d-flex align-items-center justify-content-between">
+        <a href="index.html" class="navbar-brand-custom">Predikt<span>.</span></a>
+        <button class="navbar-toggler-custom d-md-none" id="nav-toggle" aria-label="Toggle navigation">
+          <span></span><span></span><span></span>
+        </button>
+        <div class="d-none d-md-flex align-items-center gap-1">
+          <a href="index.html"       class="nav-link-custom">Home</a>
+          <a href="markets.html"     class="nav-link-custom">Markets</a>
+          <a href="leaderboard.html" class="nav-link-custom">Leaderboard</a>
+          <a href="profile.html"     class="nav-link-custom">Profile</a>
+          <a href="about.html"       class="nav-link-custom">About</a>
+          <a href="contact.html"     class="nav-link-custom">Contact</a>
+          <a href="faq.html"         class="nav-link-custom">FAQ</a>
+        </div>
+      </div>
+      <div class="d-md-none mt-2" id="mobile-nav" style="display:none!important;">
+        <div class="d-flex flex-column gap-1 pb-2">
+          <a href="index.html"       class="nav-link-custom">Home</a>
+          <a href="markets.html"     class="nav-link-custom">Markets</a>
+          <a href="leaderboard.html" class="nav-link-custom">Leaderboard</a>
+          <a href="profile.html"     class="nav-link-custom">Profile</a>
+          <a href="about.html"       class="nav-link-custom">About</a>
+          <a href="contact.html"     class="nav-link-custom">Contact</a>
+          <a href="faq.html"         class="nav-link-custom">FAQ</a>
+        </div>
+      </div>
+    </div>
+  </nav>
+
+  <!-- ===================== PAGE HEADER ===================== -->
+  <header class="page-header">
+    <div class="container">
+      <h1>All markets</h1>
+      <p>Browse open prediction markets across every category. Search by name or filter by topic.</p>
+    </div>
+  </header>
+
+  <!-- ===================== SEARCH + FILTER ===================== -->
+  <section class="section-pad-sm">
+    <div class="container">
+      <div class="row g-3 align-items-center mb-4">
+        <div class="col-md-6">
+          <input
+            type="text"
+            id="market-search"
+            class="form-control-custom"
+            placeholder="Search markets by name..."
+            aria-label="Search markets"
+          />
+        </div>
+        <div class="col-md-6">
+          <div class="d-flex gap-2 flex-wrap">
+            <button class="btn-outline-custom filter-btn active" data-filter="all" style="font-size:0.85rem; padding:0.4rem 0.9rem;">All</button>
+            <button class="btn-outline-custom filter-btn" data-filter="Politics" style="font-size:0.85rem; padding:0.4rem 0.9rem;">Politics</button>
+            <button class="btn-outline-custom filter-btn" data-filter="Technology" style="font-size:0.85rem; padding:0.4rem 0.9rem;">Technology</button>
+            <button class="btn-outline-custom filter-btn" data-filter="Sports" style="font-size:0.85rem; padding:0.4rem 0.9rem;">Sports</button>
+            <button class="btn-outline-custom filter-btn" data-filter="Economy" style="font-size:0.85rem; padding:0.4rem 0.9rem;">Economy</button>
+            <button class="btn-outline-custom filter-btn" data-filter="Science" style="font-size:0.85rem; padding:0.4rem 0.9rem;">Science</button>
+          </div>
+        </div>
+      </div>
+
+      <!-- No results message -->
+      <p id="no-results" style="display:none; color:var(--clr-muted); text-align:center; padding:2rem 0;">
+        No markets match your search. Try a different keyword or filter.
+      </p>
+
+      <!-- Market grid -->
+      <div class="row g-3" id="market-grid">
+
+        <div class="col-md-6 col-lg-4 market-card-wrapper" data-category="Technology">
+          <div class="market-card">
+            <span class="card-category">Technology</span>
+            <h3>Will GPT-5 be released before December 2026?</h3>
+            <div class="prob-bar"><div class="prob-bar-fill" style="width:71%"></div></div>
+            <div class="d-flex justify-content-between mb-3" style="font-size:0.8rem; color:var(--clr-muted)">
+              <span>Yes — 71%</span><span>No — 29%</span>
+            </div>
+            <div class="odds-row">
+              <button class="odds-btn yes">Yes &nbsp;1.41×</button>
+              <button class="odds-btn no">No &nbsp;3.45×</button>
+            </div>
+            <div class="market-meta"><span>3,441 predictions</span><span>Closes Dec 1, 2026</span></div>
+          </div>
+        </div>
+
+        <div class="col-md-6 col-lg-4 market-card-wrapper" data-category="Sports">
+          <div class="market-card">
+            <span class="card-category">Sports</span>
+            <h3>Will AFC Leopards win the FKF Premier League 2025/26?</h3>
+            <div class="prob-bar"><div class="prob-bar-fill" style="width:24%"></div></div>
+            <div class="d-flex justify-content-between mb-3" style="font-size:0.8rem; color:var(--clr-muted)">
+              <span>Yes — 24%</span><span>No — 76%</span>
+            </div>
+            <div class="odds-row">
+              <button class="odds-btn yes">Yes &nbsp;4.17×</button>
+              <button class="odds-btn no">No &nbsp;1.32×</button>
+            </div>
+            <div class="market-meta"><span>892 predictions</span><span>Closes Aug 30, 2026</span></div>
+          </div>
+        </div>
+
+        <div class="col-md-6 col-lg-4 market-card-wrapper" data-category="Economy">
+          <div class="market-card">
+            <span class="card-category">Economy</span>
+            <h3>Will Kenya's inflation rate drop below 4% by Q3 2026?</h3>
+            <div class="prob-bar"><div class="prob-bar-fill" style="width:55%"></div></div>
+            <div class="d-flex justify-content-between mb-3" style="font-size:0.8rem; color:var(--clr-muted)">
+              <span>Yes — 55%</span><span>No — 45%</span>
+            </div>
+            <div class="odds-row">
+              <button class="odds-btn yes">Yes &nbsp;1.82×</button>
+              <button class="odds-btn no">No &nbsp;2.22×</button>
+            </div>
+            <div class="market-meta"><span>1,107 predictions</span><span>Closes Sep 30, 2026</span></div>
+          </div>
+        </div>
+
+        <div class="col-md-6 col-lg-4 market-card-wrapper" data-category="Politics">
+          <div class="market-card">
+            <span class="card-category">Politics</span>
+            <h3>Will early elections be called in any EU country in 2026?</h3>
+            <div class="prob-bar"><div class="prob-bar-fill" style="width:47%"></div></div>
+            <div class="d-flex justify-content-between mb-3" style="font-size:0.8rem; color:var(--clr-muted)">
+              <span>Yes — 47%</span><span>No — 53%</span>
+            </div>
+            <div class="odds-row">
+              <button class="odds-btn yes">Yes &nbsp;2.13×</button>
+              <button class="odds-btn no">No &nbsp;1.89×</button>
+            </div>
+            <div class="market-meta"><span>678 predictions</span><span>Closes Dec 31, 2026</span></div>
+          </div>
+        </div>
+
+        <div class="col-md-6 col-lg-4 market-card-wrapper" data-category="Science">
+          <div class="market-card">
+            <span class="card-category">Science</span>
+            <h3>Will a crewed Mars mission be announced by NASA before 2028?</h3>
+            <div class="prob-bar"><div class="prob-bar-fill" style="width:33%"></div></div>
+            <div class="d-flex justify-content-between mb-3" style="font-size:0.8rem; color:var(--clr-muted)">
+              <span>Yes — 33%</span><span>No — 67%</span>
+            </div>
+            <div class="odds-row">
+              <button class="odds-btn yes">Yes &nbsp;3.03×</button>
+              <button class="odds-btn no">No &nbsp;1.49×</button>
+            </div>
+            <div class="market-meta"><span>2,205 predictions</span><span>Closes Jan 1, 2028</span></div>
+          </div>
+        </div>
+
+        <div class="col-md-6 col-lg-4 market-card-wrapper" data-category="Technology">
+          <div class="market-card">
+            <span class="card-category">Technology</span>
+            <h3>Will Apple release a foldable iPhone in 2026?</h3>
+            <div class="prob-bar"><div class="prob-bar-fill" style="width:60%"></div></div>
+            <div class="d-flex justify-content-between mb-3" style="font-size:0.8rem; color:var(--clr-muted)">
+              <span>Yes — 60%</span><span>No — 40%</span>
+            </div>
+            <div class="odds-row">
+              <button class="odds-btn yes">Yes &nbsp;1.67×</button>
+              <button class="odds-btn no">No &nbsp;2.50×</button>
+            </div>
+            <div class="market-meta"><span>4,812 predictions</span><span>Closes Dec 31, 2026</span></div>
+          </div>
+        </div>
+
+        <div class="col-md-6 col-lg-4 market-card-wrapper" data-category="Sports">
+          <div class="market-card">
+            <span class="card-category">Sports</span>
+            <h3>Will Kenya qualify for the 2026 FIFA World Cup?</h3>
+            <div class="prob-bar"><div class="prob-bar-fill" style="width:18%"></div></div>
+            <div class="d-flex justify-content-between mb-3" style="font-size:0.8rem; color:var(--clr-muted)">
+              <span>Yes — 18%</span><span>No — 82%</span>
+            </div>
+            <div class="odds-row">
+              <button class="odds-btn yes">Yes &nbsp;5.56×</button>
+              <button class="odds-btn no">No &nbsp;1.22×</button>
+            </div>
+            <div class="market-meta"><span>1,532 predictions</span><span>Closes Nov 2026</span></div>
+          </div>
+        </div>
+
+        <div class="col-md-6 col-lg-4 market-card-wrapper" data-category="Politics">
+          <div class="market-card">
+            <span class="card-category">Politics</span>
+            <h3>Will Kenya's 2027 election date be officially confirmed by end of 2026?</h3>
+            <div class="prob-bar"><div class="prob-bar-fill" style="width:64%"></div></div>
+            <div class="d-flex justify-content-between mb-3" style="font-size:0.8rem; color:var(--clr-muted)">
+              <span>Yes — 64%</span><span>No — 36%</span>
+            </div>
+            <div class="odds-row">
+              <button class="odds-btn yes">Yes &nbsp;1.56×</button>
+              <button class="odds-btn no">No &nbsp;2.78×</button>
+            </div>
+            <div class="market-meta"><span>2,019 predictions</span><span>Closes Dec 31, 2026</span></div>
+          </div>
+        </div>
+
+        <div class="col-md-6 col-lg-4 market-card-wrapper" data-category="Economy">
+          <div class="market-card">
+            <span class="card-category">Economy</span>
+            <h3>Will the Kenyan Shilling strengthen past 120/USD by year end?</h3>
+            <div class="prob-bar"><div class="prob-bar-fill" style="width:41%"></div></div>
+            <div class="d-flex justify-content-between mb-3" style="font-size:0.8rem; color:var(--clr-muted)">
+              <span>Yes — 41%</span><span>No — 59%</span>
+            </div>
+            <div class="odds-row">
+              <button class="odds-btn yes">Yes &nbsp;2.44×</button>
+              <button class="odds-btn no">No &nbsp;1.69×</button>
+            </div>
+            <div class="market-meta"><span>763 predictions</span><span>Closes Dec 31, 2026</span></div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- ===================== FOOTER ===================== -->
+  <footer class="footer-custom">
+    <div class="container">
+      <div class="row g-4 mb-4">
+        <div class="col-md-4">
+          <div class="footer-brand mb-2">Predikt<span>.</span></div>
+          <p style="font-size:0.85rem;">Community prediction markets with fixed odds. No real money — just your conviction.</p>
+        </div>
+        <div class="col-6 col-md-2">
+          <p style="font-weight:600; color:var(--clr-text); margin-bottom:0.75rem; font-size:0.875rem;">Platform</p>
+          <ul class="list-unstyled" style="font-size:0.85rem;">
+            <li><a href="markets.html">Markets</a></li>
+            <li><a href="leaderboard.html">Leaderboard</a></li>
+            <li><a href="profile.html">Profile</a></li>
+          </ul>
+        </div>
+        <div class="col-6 col-md-2">
+          <p style="font-weight:600; color:var(--clr-text); margin-bottom:0.75rem; font-size:0.875rem;">Company</p>
+          <ul class="list-unstyled" style="font-size:0.85rem;">
+            <li><a href="about.html">About</a></li>
+            <li><a href="faq.html">FAQ</a></li>
+            <li><a href="contact.html">Contact</a></li>
+          </ul>
+        </div>
+      </div>
+      <hr style="border-color:var(--clr-border);" />
+      <p style="font-size:0.8rem; text-align:center;">© 2026 Predikt. Built for educational purposes — Strathmore University Web Development.</p>
+    </div>
+  </footer>
+
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+  <script src="js/main.js"></script>
+  <script>
+    document.getElementById('nav-toggle').addEventListener('click', function() {
+      const nav = document.getElementById('mobile-nav');
+      nav.style.setProperty('display', nav.style.display === 'flex' ? 'none' : 'flex', 'important');
+      nav.style.flexDirection = 'column';
+    });
+  </script>
+</body>
+</html>
