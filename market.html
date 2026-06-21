@@ -1,0 +1,166 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Market Detail — Predikt</title>
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" />
+  <link rel="stylesheet" href="css/style.css" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
+</head>
+<body>
+
+  <nav class="navbar-custom">
+    <div class="container">
+      <div class="d-flex align-items-center justify-content-between">
+        <a href="index.html" class="navbar-brand-custom">Predikt<span>.</span></a>
+        <button class="navbar-toggler-custom d-md-none" id="nav-toggle" aria-label="Toggle navigation">
+          <span></span><span></span><span></span>
+        </button>
+        <div class="d-none d-md-flex align-items-center gap-1">
+          <a href="index.html"       class="nav-link-custom">Home</a>
+          <a href="markets.html"     class="nav-link-custom">Markets</a>
+          <a href="leaderboard.html" class="nav-link-custom">Leaderboard</a>
+          <a href="profile.html"     class="nav-link-custom">Profile</a>
+          <a href="about.html"       class="nav-link-custom">About</a>
+          <a href="contact.html"     class="nav-link-custom">Contact</a>
+          <a href="faq.html"         class="nav-link-custom">FAQ</a>
+        </div>
+      </div>
+      <div class="d-md-none mt-2" id="mobile-nav" style="display:none!important;">
+        <div class="d-flex flex-column gap-1 pb-2">
+          <a href="index.html"       class="nav-link-custom">Home</a>
+          <a href="markets.html"     class="nav-link-custom">Markets</a>
+          <a href="leaderboard.html" class="nav-link-custom">Leaderboard</a>
+          <a href="profile.html"     class="nav-link-custom">Profile</a>
+          <a href="about.html"       class="nav-link-custom">About</a>
+          <a href="contact.html"     class="nav-link-custom">Contact</a>
+          <a href="faq.html"         class="nav-link-custom">FAQ</a>
+        </div>
+      </div>
+    </div>
+  </nav>
+
+  <header class="page-header">
+    <div class="container">
+      <p class="section-label" style="margin-bottom:0.5rem;"><a href="markets.html">&larr; Back to markets</a></p>
+      <h1>Will GPT-5 be released before December 2026?</h1>
+      <p>Technology &bull; Closes December 1, 2026 &bull; 3,441 predictions so far</p>
+    </div>
+  </header>
+
+  <section class="section-pad">
+    <div class="container">
+      <div class="row g-4">
+
+        <!-- Main column -->
+        <div class="col-lg-8">
+          <div class="market-card mb-4">
+            <span class="card-category">Technology</span>
+            <h3 style="font-size:1.1rem;">Current odds</h3>
+            <div class="prob-bar" style="height:10px; margin-bottom:0.75rem;">
+              <div class="prob-bar-fill" style="width:71%"></div>
+            </div>
+            <div class="d-flex justify-content-between mb-3" style="font-size:0.9rem; color:var(--clr-muted)">
+              <span>Yes — 71%</span>
+              <span>No — 29%</span>
+            </div>
+            <div class="odds-row" style="margin-bottom:0;">
+              <button class="odds-btn yes" style="padding:0.85rem; font-size:1rem;">Predict Yes &nbsp; 1.41×</button>
+              <button class="odds-btn no" style="padding:0.85rem; font-size:1rem;">Predict No &nbsp; 3.45×</button>
+            </div>
+          </div>
+
+          <div class="market-card mb-4">
+            <h3 style="font-size:1.1rem; margin-bottom:0.75rem;">About this market</h3>
+            <p style="color:var(--clr-muted); font-size:0.9rem; line-height:1.7;">
+              This market resolves <strong style="color:var(--clr-text);">Yes</strong> if OpenAI publicly releases a model officially
+              branded "GPT-5" — via API, ChatGPT, or developer preview — on or before 1 December 2026.
+              It resolves <strong style="color:var(--clr-text);">No</strong> if no such release occurs by that date,
+              regardless of any internal announcements, leaks, or partial rollouts.
+            </p>
+            <hr class="divider" />
+            <h3 style="font-size:1rem; margin-bottom:0.5rem;">Resolution source</h3>
+            <p style="color:var(--clr-muted); font-size:0.9rem;">Official OpenAI announcements and changelog.</p>
+          </div>
+
+          <div class="market-card">
+            <h3 style="font-size:1.1rem; margin-bottom:1rem;">Recent activity</h3>
+            <table class="table-custom">
+              <thead>
+                <tr><th>User</th><th>Prediction</th><th>Amount</th><th>Time</th></tr>
+              </thead>
+              <tbody>
+                <tr><td>@kamau_t</td><td><span class="badge-yes">Yes</span></td><td>120 pts</td><td>2h ago</td></tr>
+                <tr><td>@amina.k</td><td><span class="badge-no">No</span></td><td>80 pts</td><td>5h ago</td></tr>
+                <tr><td>@brian_o</td><td><span class="badge-yes">Yes</span></td><td>200 pts</td><td>9h ago</td></tr>
+                <tr><td>@wanjiru</td><td><span class="badge-yes">Yes</span></td><td>50 pts</td><td>1d ago</td></tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+
+        <!-- Sidebar -->
+        <div class="col-lg-4">
+          <div class="market-card">
+            <h3 style="font-size:1rem; margin-bottom:1rem;">Market stats</h3>
+            <div class="d-flex justify-content-between mb-2" style="font-size:0.875rem;">
+              <span class="text-muted-custom">Total predictions</span><span>3,441</span>
+            </div>
+            <div class="d-flex justify-content-between mb-2" style="font-size:0.875rem;">
+              <span class="text-muted-custom">Category</span><span>Technology</span>
+            </div>
+            <div class="d-flex justify-content-between mb-2" style="font-size:0.875rem;">
+              <span class="text-muted-custom">Closes</span><span>Dec 1, 2026</span>
+            </div>
+            <div class="d-flex justify-content-between" style="font-size:0.875rem;">
+              <span class="text-muted-custom">Status</span><span style="color:var(--clr-yes);">Open</span>
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <footer class="footer-custom">
+    <div class="container">
+      <div class="row g-4 mb-4">
+        <div class="col-md-4">
+          <div class="footer-brand mb-2">Predikt<span>.</span></div>
+          <p style="font-size:0.85rem;">Community prediction markets with fixed odds. No real money — just your conviction.</p>
+        </div>
+        <div class="col-6 col-md-2">
+          <p style="font-weight:600; color:var(--clr-text); margin-bottom:0.75rem; font-size:0.875rem;">Platform</p>
+          <ul class="list-unstyled" style="font-size:0.85rem;">
+            <li><a href="markets.html">Markets</a></li>
+            <li><a href="leaderboard.html">Leaderboard</a></li>
+            <li><a href="profile.html">Profile</a></li>
+          </ul>
+        </div>
+        <div class="col-6 col-md-2">
+          <p style="font-weight:600; color:var(--clr-text); margin-bottom:0.75rem; font-size:0.875rem;">Company</p>
+          <ul class="list-unstyled" style="font-size:0.85rem;">
+            <li><a href="about.html">About</a></li>
+            <li><a href="faq.html">FAQ</a></li>
+            <li><a href="contact.html">Contact</a></li>
+          </ul>
+        </div>
+      </div>
+      <hr style="border-color:var(--clr-border);" />
+      <p style="font-size:0.8rem; text-align:center;">© 2026 Predikt. Built for educational purposes — Strathmore University Web Development.</p>
+    </div>
+  </footer>
+
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+  <script src="js/main.js"></script>
+  <script>
+    document.getElementById('nav-toggle').addEventListener('click', function() {
+      const nav = document.getElementById('mobile-nav');
+      nav.style.setProperty('display', nav.style.display === 'flex' ? 'none' : 'flex', 'important');
+      nav.style.flexDirection = 'column';
+    });
+  </script>
+</body>
+</html>
