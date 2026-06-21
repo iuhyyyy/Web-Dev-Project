@@ -1,0 +1,148 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>About — Predikt</title>
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" />
+  <link rel="stylesheet" href="css/style.css" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
+</head>
+<body>
+
+  <nav class="navbar-custom">
+    <div class="container">
+      <div class="d-flex align-items-center justify-content-between">
+        <a href="index.html" class="navbar-brand-custom">Predikt<span>.</span></a>
+        <button class="navbar-toggler-custom d-md-none" id="nav-toggle" aria-label="Toggle navigation">
+          <span></span><span></span><span></span>
+        </button>
+        <div class="d-none d-md-flex align-items-center gap-1">
+          <a href="index.html"       class="nav-link-custom">Home</a>
+          <a href="markets.html"     class="nav-link-custom">Markets</a>
+          <a href="leaderboard.html" class="nav-link-custom">Leaderboard</a>
+          <a href="profile.html"     class="nav-link-custom">Profile</a>
+          <a href="about.html"       class="nav-link-custom">About</a>
+          <a href="contact.html"     class="nav-link-custom">Contact</a>
+          <a href="faq.html"         class="nav-link-custom">FAQ</a>
+        </div>
+      </div>
+      <div class="d-md-none mt-2" id="mobile-nav" style="display:none!important;">
+        <div class="d-flex flex-column gap-1 pb-2">
+          <a href="index.html"       class="nav-link-custom">Home</a>
+          <a href="markets.html"     class="nav-link-custom">Markets</a>
+          <a href="leaderboard.html" class="nav-link-custom">Leaderboard</a>
+          <a href="profile.html"     class="nav-link-custom">Profile</a>
+          <a href="about.html"       class="nav-link-custom">About</a>
+          <a href="contact.html"     class="nav-link-custom">Contact</a>
+          <a href="faq.html"         class="nav-link-custom">FAQ</a>
+        </div>
+      </div>
+    </div>
+  </nav>
+
+  <header class="page-header">
+    <div class="container">
+      <h1>About Predikt</h1>
+      <p>A community-driven prediction market built for curiosity, not currency.</p>
+    </div>
+  </header>
+
+  <section class="section-pad">
+    <div class="container">
+      <div class="row">
+        <div class="col-lg-8">
+          <h2 style="font-size:1.3rem; margin-bottom:0.75rem;">Our mission</h2>
+          <p style="color:var(--clr-muted); line-height:1.8; margin-bottom:1.5rem;">
+            Predikt exists to make forecasting fun and social. Every day, people form opinions about what
+            will happen next — in politics, technology, sports, and the economy. We built a place where
+            those opinions can be tested against fixed odds, tracked over time, and compared against a
+            community of fellow predictors.
+          </p>
+          <p style="color:var(--clr-muted); line-height:1.8; margin-bottom:1.5rem;">
+            Unlike traditional betting platforms, Predikt uses no real money. Every prediction is scored in
+            points, and accuracy — not bankroll — is what earns you a spot on the leaderboard.
+          </p>
+
+          <hr class="divider" />
+
+          <h2 style="font-size:1.3rem; margin-bottom:0.75rem;">How fixed odds work</h2>
+          <p style="color:var(--clr-muted); line-height:1.8; margin-bottom:1.5rem;">
+            Each market shows two outcomes — Yes and No — along with a multiplier for each. The multiplier
+            reflects the community's current belief: the more popular an outcome, the lower its multiplier.
+            Predicting a less likely outcome correctly earns you more points, because that's a better
+            demonstration of forecasting skill.
+          </p>
+
+          <hr class="divider" />
+
+          <h2 style="font-size:1.3rem; margin-bottom:0.75rem;">Built as a learning project</h2>
+          <p style="color:var(--clr-muted); line-height:1.8;">
+            Predikt began as a Web Application Development assignment at Strathmore University and grew
+            into a fuller product exploration — combining front-end design, JavaScript interactivity, and
+            structured version control practice.
+          </p>
+        </div>
+
+        <div class="col-lg-4">
+          <div class="market-card">
+            <h3 style="font-size:1rem; margin-bottom:1rem;">Platform at a glance</h3>
+            <div class="d-flex justify-content-between mb-2" style="font-size:0.875rem;">
+              <span class="text-muted-custom">Open markets</span><span>142</span>
+            </div>
+            <div class="d-flex justify-content-between mb-2" style="font-size:0.875rem;">
+              <span class="text-muted-custom">Predictions made</span><span>8,300+</span>
+            </div>
+            <div class="d-flex justify-content-between mb-2" style="font-size:0.875rem;">
+              <span class="text-muted-custom">Registered users</span><span>2,100+</span>
+            </div>
+            <div class="d-flex justify-content-between" style="font-size:0.875rem;">
+              <span class="text-muted-custom">Launched</span><span>March 2026</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <footer class="footer-custom">
+    <div class="container">
+      <div class="row g-4 mb-4">
+        <div class="col-md-4">
+          <div class="footer-brand mb-2">Predikt<span>.</span></div>
+          <p style="font-size:0.85rem;">Community prediction markets with fixed odds. No real money — just your conviction.</p>
+        </div>
+        <div class="col-6 col-md-2">
+          <p style="font-weight:600; color:var(--clr-text); margin-bottom:0.75rem; font-size:0.875rem;">Platform</p>
+          <ul class="list-unstyled" style="font-size:0.85rem;">
+            <li><a href="markets.html">Markets</a></li>
+            <li><a href="leaderboard.html">Leaderboard</a></li>
+            <li><a href="profile.html">Profile</a></li>
+          </ul>
+        </div>
+        <div class="col-6 col-md-2">
+          <p style="font-weight:600; color:var(--clr-text); margin-bottom:0.75rem; font-size:0.875rem;">Company</p>
+          <ul class="list-unstyled" style="font-size:0.85rem;">
+            <li><a href="about.html">About</a></li>
+            <li><a href="faq.html">FAQ</a></li>
+            <li><a href="contact.html">Contact</a></li>
+          </ul>
+        </div>
+      </div>
+      <hr style="border-color:var(--clr-border);" />
+      <p style="font-size:0.8rem; text-align:center;">© 2026 Predikt. Built for educational purposes — Strathmore University Web Development.</p>
+    </div>
+  </footer>
+
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+  <script src="js/main.js"></script>
+  <script>
+    document.getElementById('nav-toggle').addEventListener('click', function() {
+      const nav = document.getElementById('mobile-nav');
+      nav.style.setProperty('display', nav.style.display === 'flex' ? 'none' : 'flex', 'important');
+      nav.style.flexDirection = 'column';
+    });
+  </script>
+</body>
+</html>
