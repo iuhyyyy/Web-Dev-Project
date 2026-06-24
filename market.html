@@ -1,166 +1,721 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Market Detail — Predikt</title>
-  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" />
-  <link rel="stylesheet" href="css/style.css" />
-  <link rel="preconnect" href="https://fonts.googleapis.com" />
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Market Detail — Predikt</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" />
+    <style>
+        :root {
+            color-scheme: dark;
+            --clr-bg: #07111d;
+            --clr-bg-2: #0d1a2c;
+            --clr-surface: rgba(15, 27, 43, 0.88);
+            --clr-surface-2: rgba(26, 43, 66, 0.92);
+            --clr-border: rgba(148, 163, 184, 0.16);
+            --clr-yes: #4ade80;
+            --clr-yes-dim: rgba(34, 197, 94, 0.16);
+            --clr-no: #f87171;
+            --clr-no-dim: rgba(239, 68, 68, 0.16);
+            --clr-accent: #60a5fa;
+            --clr-accent-dim: rgba(96, 165, 250, 0.18);
+            --clr-text: #f8fafc;
+            --clr-muted: #94a3b8;
+            --radius: 18px;
+            --radius-sm: 12px;
+            --transition: 0.2s ease;
+            --shadow: 0 16px 40px rgba(2, 6, 23, 0.28);
+        }
+
+        *,
+        *::before,
+        *::after {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            min-height: 100vh;
+            background:
+                radial-gradient(circle at top left, rgba(96, 165, 250, 0.14), transparent 32%),
+                radial-gradient(circle at top right, rgba(74, 222, 128, 0.08), transparent 28%),
+                linear-gradient(180deg, var(--clr-bg), var(--clr-bg-2));
+            color: var(--clr-text);
+            font-family: 'Inter', system-ui, sans-serif;
+            line-height: 1.6;
+            position: relative;
+            overflow-x: hidden;
+        }
+
+        body::before {
+            content: '';
+            position: fixed;
+            inset: 0;
+            background-image: linear-gradient(rgba(255, 255, 255, 0.02) 1px, transparent 1px), linear-gradient(90deg, rgba(255, 255, 255, 0.02) 1px, transparent 1px);
+            background-size: 48px 48px;
+            mask-image: linear-gradient(180deg, rgba(0, 0, 0, 0.72), transparent 85%);
+            pointer-events: none;
+            z-index: -1;
+        }
+
+        a {
+            color: var(--clr-accent);
+            text-decoration: none;
+        }
+
+        a:hover {
+            color: #93c5fd;
+            text-decoration: none;
+        }
+
+        img {
+            max-width: 100%;
+            display: block;
+        }
+
+        h1,
+        h2,
+        h3,
+        h4,
+        h5,
+        h6 {
+            font-weight: 700;
+            line-height: 1.15;
+            color: var(--clr-text);
+            letter-spacing: -0.02em;
+        }
+
+        hr {
+            opacity: 1;
+        }
+
+        .text-muted-custom {
+            color: var(--clr-muted);
+        }
+
+        .navbar-custom,
+        .footer-custom,
+        .market-card,
+        .page-header,
+        .stats-strip {
+            backdrop-filter: blur(18px);
+            -webkit-backdrop-filter: blur(18px);
+        }
+
+        .navbar-custom {
+            background: rgba(7, 17, 29, 0.8);
+            border-bottom: 1px solid var(--clr-border);
+            padding: 0.85rem 0;
+            position: sticky;
+            top: 0;
+            z-index: 1020;
+        }
+
+        .navbar-brand-custom {
+            font-size: 1.45rem;
+            font-weight: 800;
+            color: var(--clr-text) !important;
+            letter-spacing: -0.04em;
+        }
+
+        .navbar-brand-custom span {
+            color: var(--clr-accent);
+        }
+
+        .nav-link-custom {
+            color: var(--clr-muted) !important;
+            font-size: 0.92rem;
+            font-weight: 600;
+            padding: 0.45rem 0.85rem !important;
+            border-radius: 999px;
+            transition: background var(--transition), color var(--transition), transform var(--transition);
+        }
+
+        .nav-link-custom:hover,
+        .nav-link-custom.active {
+            color: var(--clr-text) !important;
+            background: var(--clr-surface-2);
+        }
+
+        .navbar-toggler-custom {
+            border: 1px solid var(--clr-border);
+            padding: 0.45rem 0.7rem;
+            background: rgba(255, 255, 255, 0.02);
+            border-radius: 12px;
+            cursor: pointer;
+            box-shadow: var(--shadow);
+        }
+
+        .navbar-toggler-custom span {
+            display: block;
+            width: 20px;
+            height: 2px;
+            background: var(--clr-text);
+            margin: 4px 0;
+            border-radius: 2px;
+        }
+
+        #mobile-nav {
+            background: rgba(9, 18, 31, 0.92);
+            border: 1px solid var(--clr-border);
+            border-radius: 16px;
+            box-shadow: var(--shadow);
+        }
+
+        .section-pad {
+            padding: 4.5rem 0;
+        }
+
+        .section-pad-sm {
+            padding: 2.25rem 0;
+        }
+
+        .section-label {
+            font-size: 0.77rem;
+            font-weight: 800;
+            text-transform: uppercase;
+            letter-spacing: 0.16em;
+            color: var(--clr-accent);
+            margin-bottom: 0.75rem;
+        }
+
+        .hero {
+            padding: 5.5rem 0 4.5rem;
+            border-bottom: 1px solid var(--clr-border);
+        }
+
+        .hero h1 {
+            font-size: clamp(2.2rem, 5vw, 4.2rem);
+            margin-bottom: 1rem;
+        }
+
+        .hero p {
+            font-size: 1.08rem;
+            color: var(--clr-muted);
+            max-width: 560px;
+            margin-bottom: 2rem;
+        }
+
+        .stats-strip {
+            background: rgba(10, 19, 32, 0.78);
+            border-top: 1px solid var(--clr-border);
+            border-bottom: 1px solid var(--clr-border);
+            padding: 1.5rem 0;
+        }
+
+        .stat-item {
+            text-align: center;
+        }
+
+        .stat-item .stat-number {
+            font-size: 1.8rem;
+            font-weight: 800;
+            color: var(--clr-text);
+            display: block;
+        }
+
+        .stat-item .stat-label {
+            font-size: 0.78rem;
+            color: var(--clr-muted);
+            text-transform: uppercase;
+            letter-spacing: 0.08em;
+        }
+
+        .market-card {
+            background: linear-gradient(180deg, rgba(19, 31, 48, 0.95), rgba(13, 22, 35, 0.95));
+            border: 1px solid var(--clr-border);
+            border-radius: var(--radius);
+            padding: 1.25rem;
+            box-shadow: var(--shadow);
+            transition: transform var(--transition), border-color var(--transition), box-shadow var(--transition);
+            height: 100%;
+        }
+
+        .market-card:hover {
+            transform: translateY(-3px);
+            border-color: rgba(96, 165, 250, 0.38);
+            box-shadow: 0 24px 50px rgba(2, 6, 23, 0.38);
+        }
+
+        .market-card .card-category {
+            font-size: 0.72rem;
+            font-weight: 800;
+            text-transform: uppercase;
+            letter-spacing: 0.08em;
+            color: var(--clr-accent);
+            background: var(--clr-accent-dim);
+            padding: 0.24rem 0.7rem;
+            border-radius: 999px;
+            display: inline-block;
+            margin-bottom: 0.85rem;
+        }
+
+        .market-card h3 {
+            font-size: 1rem;
+            font-weight: 700;
+            margin-bottom: 1rem;
+            color: var(--clr-text);
+        }
+
+        .prob-bar {
+            height: 7px;
+            background: rgba(239, 68, 68, 0.18);
+            border-radius: 999px;
+            overflow: hidden;
+            margin-bottom: 0.5rem;
+        }
+
+        .prob-bar-fill {
+            height: 100%;
+            background: linear-gradient(90deg, #4ade80, #22c55e);
+            border-radius: 999px;
+            transition: width 0.4s ease;
+        }
+
+        .odds-row {
+            display: flex;
+            gap: 0.5rem;
+            margin-bottom: 1rem;
+        }
+
+        .odds-btn,
+        .btn-primary-custom,
+        .btn-outline-custom {
+            border-radius: var(--radius-sm);
+            font-weight: 700;
+            transition: transform var(--transition), background var(--transition), border-color var(--transition), opacity var(--transition), color var(--transition);
+        }
+
+        .odds-btn {
+            flex: 1;
+            padding: 0.62rem;
+            border: 1px solid transparent;
+            font-size: 0.92rem;
+            cursor: pointer;
+        }
+
+        .odds-btn:hover {
+            transform: translateY(-1px);
+        }
+
+        .odds-btn.yes {
+            background: var(--clr-yes-dim);
+            color: var(--clr-yes);
+            border-color: rgba(74, 222, 128, 0.18);
+        }
+
+        .odds-btn.no {
+            background: var(--clr-no-dim);
+            color: var(--clr-no);
+            border-color: rgba(248, 113, 113, 0.18);
+        }
+
+        .market-meta {
+            font-size: 0.8rem;
+            color: var(--clr-muted);
+            display: flex;
+            justify-content: space-between;
+            gap: 0.5rem;
+        }
+
+        .btn-primary-custom {
+            background: linear-gradient(135deg, #60a5fa, #3b82f6);
+            color: #fff;
+            border: 1px solid rgba(96, 165, 250, 0.25);
+            padding: 0.68rem 1.45rem;
+            display: inline-block;
+            box-shadow: 0 12px 24px rgba(59, 130, 246, 0.22);
+        }
+
+        .btn-primary-custom:hover {
+            opacity: 0.95;
+            color: #fff;
+            transform: translateY(-1px);
+        }
+
+        .btn-outline-custom {
+            background: rgba(255, 255, 255, 0.02);
+            color: var(--clr-text);
+            border: 1px solid var(--clr-border);
+            padding: 0.68rem 1.45rem;
+            display: inline-block;
+        }
+
+        .btn-outline-custom:hover {
+            border-color: rgba(96, 165, 250, 0.45);
+            background: var(--clr-accent-dim);
+            color: var(--clr-text);
+            transform: translateY(-1px);
+        }
+
+        .footer-custom {
+            background: rgba(7, 17, 29, 0.86);
+            border-top: 1px solid var(--clr-border);
+            padding: 2.5rem 0 1.5rem;
+            color: var(--clr-muted);
+            font-size: 0.875rem;
+        }
+
+        .footer-custom a {
+            color: var(--clr-muted);
+            transition: color var(--transition);
+        }
+
+        .footer-custom a:hover {
+            color: var(--clr-text);
+            text-decoration: none;
+        }
+
+        .footer-custom .footer-brand {
+            font-weight: 800;
+            font-size: 1.1rem;
+            color: var(--clr-text);
+        }
+
+        .footer-custom .footer-brand span {
+            color: var(--clr-accent);
+        }
+
+        .form-control-custom {
+            background: rgba(13, 22, 35, 0.92);
+            border: 1px solid var(--clr-border);
+            border-radius: var(--radius-sm);
+            color: var(--clr-text);
+            padding: 0.75rem 0.95rem;
+            width: 100%;
+            font-size: 0.95rem;
+            transition: border-color var(--transition), box-shadow var(--transition);
+            outline: none;
+        }
+
+        .form-control-custom:focus {
+            border-color: rgba(96, 165, 250, 0.7);
+            box-shadow: 0 0 0 4px rgba(96, 165, 250, 0.12);
+        }
+
+        .form-control-custom::placeholder {
+            color: var(--clr-muted);
+        }
+
+        .form-label-custom {
+            display: block;
+            font-size: 0.875rem;
+            font-weight: 700;
+            margin-bottom: 0.45rem;
+            color: var(--clr-text);
+        }
+
+        .field-error {
+            font-size: 0.8rem;
+            color: var(--clr-no);
+            margin-top: 0.35rem;
+            display: none;
+        }
+
+        .field-error.show {
+            display: block;
+        }
+
+        .page-header {
+            padding: 3.25rem 0 2rem;
+            border-bottom: 1px solid var(--clr-border);
+            background: rgba(8, 16, 28, 0.45);
+        }
+
+        .page-header h1 {
+            font-size: clamp(1.8rem, 4vw, 2.7rem);
+        }
+
+        .page-header p {
+            color: var(--clr-muted);
+            margin-top: 0.5rem;
+        }
+
+        .table-custom {
+            width: 100%;
+            border-collapse: collapse;
+            font-size: 0.9rem;
+        }
+
+        .table-custom thead {
+            background: rgba(255, 255, 255, 0.02);
+        }
+
+        .table-custom th {
+            text-align: left;
+            padding: 0.8rem 1rem;
+            font-size: 0.72rem;
+            text-transform: uppercase;
+            letter-spacing: 0.08em;
+            color: var(--clr-muted);
+            border-bottom: 1px solid var(--clr-border);
+        }
+
+        .table-custom td {
+            padding: 0.88rem 1rem;
+            border-bottom: 1px solid var(--clr-border);
+            vertical-align: middle;
+        }
+
+        .table-custom tr:hover td {
+            background: rgba(255, 255, 255, 0.02);
+        }
+
+        .badge-yes,
+        .badge-no {
+            padding: 0.22rem 0.65rem;
+            border-radius: 999px;
+            font-size: 0.74rem;
+            font-weight: 800;
+        }
+
+        .badge-yes {
+            background: var(--clr-yes-dim);
+            color: var(--clr-yes);
+        }
+
+        .badge-no {
+            background: var(--clr-no-dim);
+            color: var(--clr-no);
+        }
+
+        .divider {
+            border: none;
+            border-top: 1px solid var(--clr-border);
+            margin: 2rem 0;
+        }
+
+        .filter-btn.active {
+            background: var(--clr-accent-dim);
+            border-color: rgba(96, 165, 250, 0.45);
+            color: var(--clr-text);
+        }
+
+        .market-card-wrapper {
+            display: flex;
+        }
+
+        .market-card-wrapper>.market-card {
+            width: 100%;
+        }
+
+        @media (max-width: 768px) {
+            .hero {
+                padding: 3.5rem 0 2.75rem;
+            }
+
+            .section-pad {
+                padding: 2.75rem 0;
+            }
+
+            .odds-row {
+                flex-direction: row;
+            }
+
+            .market-meta {
+                flex-direction: column;
+            }
+        }
+    </style>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap"
+        rel="stylesheet" />
 </head>
+
 <body>
 
-  <nav class="navbar-custom">
-    <div class="container">
-      <div class="d-flex align-items-center justify-content-between">
-        <a href="index.html" class="navbar-brand-custom">Predikt<span>.</span></a>
-        <button class="navbar-toggler-custom d-md-none" id="nav-toggle" aria-label="Toggle navigation">
-          <span></span><span></span><span></span>
-        </button>
-        <div class="d-none d-md-flex align-items-center gap-1">
-          <a href="index.html"       class="nav-link-custom">Home</a>
-          <a href="markets.html"     class="nav-link-custom">Markets</a>
-          <a href="leaderboard.html" class="nav-link-custom">Leaderboard</a>
-          <a href="profile.html"     class="nav-link-custom">Profile</a>
-          <a href="about.html"       class="nav-link-custom">About</a>
-          <a href="contact.html"     class="nav-link-custom">Contact</a>
-          <a href="faq.html"         class="nav-link-custom">FAQ</a>
-        </div>
-      </div>
-      <div class="d-md-none mt-2" id="mobile-nav" style="display:none!important;">
-        <div class="d-flex flex-column gap-1 pb-2">
-          <a href="index.html"       class="nav-link-custom">Home</a>
-          <a href="markets.html"     class="nav-link-custom">Markets</a>
-          <a href="leaderboard.html" class="nav-link-custom">Leaderboard</a>
-          <a href="profile.html"     class="nav-link-custom">Profile</a>
-          <a href="about.html"       class="nav-link-custom">About</a>
-          <a href="contact.html"     class="nav-link-custom">Contact</a>
-          <a href="faq.html"         class="nav-link-custom">FAQ</a>
-        </div>
-      </div>
-    </div>
-  </nav>
-
-  <header class="page-header">
-    <div class="container">
-      <p class="section-label" style="margin-bottom:0.5rem;"><a href="markets.html">&larr; Back to markets</a></p>
-      <h1>Will GPT-5 be released before December 2026?</h1>
-      <p>Technology &bull; Closes December 1, 2026 &bull; 3,441 predictions so far</p>
-    </div>
-  </header>
-
-  <section class="section-pad">
-    <div class="container">
-      <div class="row g-4">
-
-        <!-- Main column -->
-        <div class="col-lg-8">
-          <div class="market-card mb-4">
-            <span class="card-category">Technology</span>
-            <h3 style="font-size:1.1rem;">Current odds</h3>
-            <div class="prob-bar" style="height:10px; margin-bottom:0.75rem;">
-              <div class="prob-bar-fill" style="width:71%"></div>
+    <nav class="navbar-custom">
+        <div class="container">
+            <div class="d-flex align-items-center justify-content-between">
+                <a href="index.html" class="navbar-brand-custom">Predikt<span>.</span></a>
+                <button class="navbar-toggler-custom d-md-none" id="nav-toggle" aria-label="Toggle navigation">
+                    <span></span><span></span><span></span>
+                </button>
+                <div class="d-none d-md-flex align-items-center gap-1">
+                    <a href="index.html" class="nav-link-custom">Home</a>
+                    <a href="markets.html" class="nav-link-custom">Markets</a>
+                    <a href="leaderboard.html" class="nav-link-custom">Leaderboard</a>
+                    <a href="profile.html" class="nav-link-custom">Profile</a>
+                    <a href="about.html" class="nav-link-custom">About</a>
+                    <a href="contact.html" class="nav-link-custom">Contact</a>
+                    <a href="faq.html" class="nav-link-custom">FAQ</a>
+                </div>
             </div>
-            <div class="d-flex justify-content-between mb-3" style="font-size:0.9rem; color:var(--clr-muted)">
-              <span>Yes — 71%</span>
-              <span>No — 29%</span>
+            <div class="d-md-none mt-2" id="mobile-nav" style="display:none!important;">
+                <div class="d-flex flex-column gap-1 pb-2">
+                    <a href="index.html" class="nav-link-custom">Home</a>
+                    <a href="markets.html" class="nav-link-custom">Markets</a>
+                    <a href="leaderboard.html" class="nav-link-custom">Leaderboard</a>
+                    <a href="profile.html" class="nav-link-custom">Profile</a>
+                    <a href="about.html" class="nav-link-custom">About</a>
+                    <a href="contact.html" class="nav-link-custom">Contact</a>
+                    <a href="faq.html" class="nav-link-custom">FAQ</a>
+                </div>
             </div>
-            <div class="odds-row" style="margin-bottom:0;">
-              <button class="odds-btn yes" style="padding:0.85rem; font-size:1rem;">Predict Yes &nbsp; 1.41×</button>
-              <button class="odds-btn no" style="padding:0.85rem; font-size:1rem;">Predict No &nbsp; 3.45×</button>
-            </div>
-          </div>
-
-          <div class="market-card mb-4">
-            <h3 style="font-size:1.1rem; margin-bottom:0.75rem;">About this market</h3>
-            <p style="color:var(--clr-muted); font-size:0.9rem; line-height:1.7;">
-              This market resolves <strong style="color:var(--clr-text);">Yes</strong> if OpenAI publicly releases a model officially
-              branded "GPT-5" — via API, ChatGPT, or developer preview — on or before 1 December 2026.
-              It resolves <strong style="color:var(--clr-text);">No</strong> if no such release occurs by that date,
-              regardless of any internal announcements, leaks, or partial rollouts.
-            </p>
-            <hr class="divider" />
-            <h3 style="font-size:1rem; margin-bottom:0.5rem;">Resolution source</h3>
-            <p style="color:var(--clr-muted); font-size:0.9rem;">Official OpenAI announcements and changelog.</p>
-          </div>
-
-          <div class="market-card">
-            <h3 style="font-size:1.1rem; margin-bottom:1rem;">Recent activity</h3>
-            <table class="table-custom">
-              <thead>
-                <tr><th>User</th><th>Prediction</th><th>Amount</th><th>Time</th></tr>
-              </thead>
-              <tbody>
-                <tr><td>@kamau_t</td><td><span class="badge-yes">Yes</span></td><td>120 pts</td><td>2h ago</td></tr>
-                <tr><td>@amina.k</td><td><span class="badge-no">No</span></td><td>80 pts</td><td>5h ago</td></tr>
-                <tr><td>@brian_o</td><td><span class="badge-yes">Yes</span></td><td>200 pts</td><td>9h ago</td></tr>
-                <tr><td>@wanjiru</td><td><span class="badge-yes">Yes</span></td><td>50 pts</td><td>1d ago</td></tr>
-              </tbody>
-            </table>
-          </div>
         </div>
+    </nav>
 
-        <!-- Sidebar -->
-        <div class="col-lg-4">
-          <div class="market-card">
-            <h3 style="font-size:1rem; margin-bottom:1rem;">Market stats</h3>
-            <div class="d-flex justify-content-between mb-2" style="font-size:0.875rem;">
-              <span class="text-muted-custom">Total predictions</span><span>3,441</span>
-            </div>
-            <div class="d-flex justify-content-between mb-2" style="font-size:0.875rem;">
-              <span class="text-muted-custom">Category</span><span>Technology</span>
-            </div>
-            <div class="d-flex justify-content-between mb-2" style="font-size:0.875rem;">
-              <span class="text-muted-custom">Closes</span><span>Dec 1, 2026</span>
-            </div>
-            <div class="d-flex justify-content-between" style="font-size:0.875rem;">
-              <span class="text-muted-custom">Status</span><span style="color:var(--clr-yes);">Open</span>
-            </div>
-          </div>
+    <header class="page-header">
+        <div class="container">
+            <p class="section-label" style="margin-bottom:0.5rem;"><a href="markets.html">&larr; Back to markets</a></p>
+            <h1>Will GPT-5 be released before December 2026?</h1>
+            <p>Technology &bull; Closes December 1, 2026 &bull; 3,441 predictions so far</p>
         </div>
+    </header>
 
-      </div>
-    </div>
-  </section>
+    <section class="section-pad">
+        <div class="container">
+            <div class="row g-4">
 
-  <footer class="footer-custom">
-    <div class="container">
-      <div class="row g-4 mb-4">
-        <div class="col-md-4">
-          <div class="footer-brand mb-2">Predikt<span>.</span></div>
-          <p style="font-size:0.85rem;">Community prediction markets with fixed odds. No real money — just your conviction.</p>
-        </div>
-        <div class="col-6 col-md-2">
-          <p style="font-weight:600; color:var(--clr-text); margin-bottom:0.75rem; font-size:0.875rem;">Platform</p>
-          <ul class="list-unstyled" style="font-size:0.85rem;">
-            <li><a href="markets.html">Markets</a></li>
-            <li><a href="leaderboard.html">Leaderboard</a></li>
-            <li><a href="profile.html">Profile</a></li>
-          </ul>
-        </div>
-        <div class="col-6 col-md-2">
-          <p style="font-weight:600; color:var(--clr-text); margin-bottom:0.75rem; font-size:0.875rem;">Company</p>
-          <ul class="list-unstyled" style="font-size:0.85rem;">
-            <li><a href="about.html">About</a></li>
-            <li><a href="faq.html">FAQ</a></li>
-            <li><a href="contact.html">Contact</a></li>
-          </ul>
-        </div>
-      </div>
-      <hr style="border-color:var(--clr-border);" />
-      <p style="font-size:0.8rem; text-align:center;">© 2026 Predikt. Built for educational purposes — Strathmore University Web Development.</p>
-    </div>
-  </footer>
+                <!-- Main column -->
+                <div class="col-lg-8">
+                    <div class="market-card mb-4">
+                        <span class="card-category">Technology</span>
+                        <h3 style="font-size:1.1rem;">Current odds</h3>
+                        <div class="prob-bar" style="height:10px; margin-bottom:0.75rem;">
+                            <div class="prob-bar-fill" style="width:71%"></div>
+                        </div>
+                        <div class="d-flex justify-content-between mb-3"
+                            style="font-size:0.9rem; color:var(--clr-muted)">
+                            <span>Yes — 71%</span>
+                            <span>No — 29%</span>
+                        </div>
+                        <div class="odds-row" style="margin-bottom:0;">
+                            <button class="odds-btn yes" style="padding:0.85rem; font-size:1rem;">Predict Yes &nbsp;
+                                1.41×</button>
+                            <button class="odds-btn no" style="padding:0.85rem; font-size:1rem;">Predict No &nbsp;
+                                3.45×</button>
+                        </div>
+                    </div>
 
-  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
-  <script src="js/main.js"></script>
-  <script>
-    document.getElementById('nav-toggle').addEventListener('click', function() {
-      const nav = document.getElementById('mobile-nav');
-      nav.style.setProperty('display', nav.style.display === 'flex' ? 'none' : 'flex', 'important');
-      nav.style.flexDirection = 'column';
-    });
-  </script>
+                    <div class="market-card mb-4">
+                        <h3 style="font-size:1.1rem; margin-bottom:0.75rem;">About this market</h3>
+                        <p style="color:var(--clr-muted); font-size:0.9rem; line-height:1.7;">
+                            This market resolves <strong style="color:var(--clr-text);">Yes</strong> if OpenAI publicly
+                            releases a model officially
+                            branded "GPT-5" — via API, ChatGPT, or developer preview — on or before 1 December 2026.
+                            It resolves <strong style="color:var(--clr-text);">No</strong> if no such release occurs by
+                            that date,
+                            regardless of any internal announcements, leaks, or partial rollouts.
+                        </p>
+                        <hr class="divider" />
+                        <h3 style="font-size:1rem; margin-bottom:0.5rem;">Resolution source</h3>
+                        <p style="color:var(--clr-muted); font-size:0.9rem;">Official OpenAI announcements and
+                            changelog.</p>
+                    </div>
+
+                    <div class="market-card">
+                        <h3 style="font-size:1.1rem; margin-bottom:1rem;">Recent activity</h3>
+                        <table class="table-custom">
+                            <thead>
+                                <tr>
+                                    <th>User</th>
+                                    <th>Prediction</th>
+                                    <th>Amount</th>
+                                    <th>Time</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>@kamau_t</td>
+                                    <td><span class="badge-yes">Yes</span></td>
+                                    <td>120 pts</td>
+                                    <td>2h ago</td>
+                                </tr>
+                                <tr>
+                                    <td>@amina.k</td>
+                                    <td><span class="badge-no">No</span></td>
+                                    <td>80 pts</td>
+                                    <td>5h ago</td>
+                                </tr>
+                                <tr>
+                                    <td>@brian_o</td>
+                                    <td><span class="badge-yes">Yes</span></td>
+                                    <td>200 pts</td>
+                                    <td>9h ago</td>
+                                </tr>
+                                <tr>
+                                    <td>@wanjiru</td>
+                                    <td><span class="badge-yes">Yes</span></td>
+                                    <td>50 pts</td>
+                                    <td>1d ago</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+
+                <!-- Sidebar -->
+                <div class="col-lg-4">
+                    <div class="market-card">
+                        <h3 style="font-size:1rem; margin-bottom:1rem;">Market stats</h3>
+                        <div class="d-flex justify-content-between mb-2" style="font-size:0.875rem;">
+                            <span class="text-muted-custom">Total predictions</span><span>3,441</span>
+                        </div>
+                        <div class="d-flex justify-content-between mb-2" style="font-size:0.875rem;">
+                            <span class="text-muted-custom">Category</span><span>Technology</span>
+                        </div>
+                        <div class="d-flex justify-content-between mb-2" style="font-size:0.875rem;">
+                            <span class="text-muted-custom">Closes</span><span>Dec 1, 2026</span>
+                        </div>
+                        <div class="d-flex justify-content-between" style="font-size:0.875rem;">
+                            <span class="text-muted-custom">Status</span><span style="color:var(--clr-yes);">Open</span>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </section>
+
+    <footer class="footer-custom">
+        <div class="container">
+            <div class="row g-4 mb-4">
+                <div class="col-md-4">
+                    <div class="footer-brand mb-2">Predikt<span>.</span></div>
+                    <p style="font-size:0.85rem;">Community prediction markets with fixed odds. No real money — just
+                        your conviction.</p>
+                </div>
+                <div class="col-6 col-md-2">
+                    <p style="font-weight:600; color:var(--clr-text); margin-bottom:0.75rem; font-size:0.875rem;">
+                        Platform</p>
+                    <ul class="list-unstyled" style="font-size:0.85rem;">
+                        <li><a href="markets.html">Markets</a></li>
+                        <li><a href="leaderboard.html">Leaderboard</a></li>
+                        <li><a href="profile.html">Profile</a></li>
+                    </ul>
+                </div>
+                <div class="col-6 col-md-2">
+                    <p style="font-weight:600; color:var(--clr-text); margin-bottom:0.75rem; font-size:0.875rem;">
+                        Company</p>
+                    <ul class="list-unstyled" style="font-size:0.85rem;">
+                        <li><a href="about.html">About</a></li>
+                        <li><a href="faq.html">FAQ</a></li>
+                        <li><a href="contact.html">Contact</a></li>
+                    </ul>
+                </div>
+            </div>
+            <hr style="border-color:var(--clr-border);" />
+            <p style="font-size:0.8rem; text-align:center;">© 2026 Predikt. Built for educational purposes — Strathmore
+                University Web Development.</p>
+        </div>
+    </footer>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="js/main.js"></script>
+    <script>
+        document.getElementById('nav-toggle').addEventListener('click', function () {
+            const nav = document.getElementById('mobile-nav');
+            nav.style.setProperty('display', nav.style.display === 'flex' ? 'none' : 'flex', 'important');
+            nav.style.flexDirection = 'column';
+        });
+    </script>
 </body>
+
 </html>
