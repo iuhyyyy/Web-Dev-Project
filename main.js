@@ -58,6 +58,82 @@ document.addEventListener('DOMContentLoaded', () => {
         filterMarkets();
       });
     });
+
+    function parseMultiplier(button) {
+      const match = button.textContent.match(/([0-9]+(?:\.[0-9]+)?)×/);
+      return match ? Number(match[1]) : 1;
+    }
+
+    function formatCurrency(value) {
+      return `KSh ${value.toFixed(2)}`;
+    }
+
+    function ensureBetSlip(card) {
+      let slip = card.querySelector('.bet-slip');
+
+      if (!slip) {
+        slip = document.createElement('div');
+        slip.className = 'bet-slip';
+        slip.innerHTML = `
+          <div class="bet-slip-header">
+            <span>Stake calculator</span>
+            <button type="button" class="btn btn-sm btn-outline-secondary bet-close" style="border-radius:999px; font-size:0.75rem; padding:0.2rem 0.65rem;">Close</button>
+          </div>
+          <label class="form-label" style="font-size:0.8rem; color:var(--clr-muted); margin-bottom:0.35rem;">Stake amount</label>
+          <input type="number" min="1" step="1" class="bet-stake" placeholder="Enter amount" />
+          <div class="bet-summary">
+            <div><span>Potential payout:</span> <strong class="bet-payout">KSh 0.00</strong></div>
+            <div><span>Potential profit:</span> <strong class="bet-profit">KSh 0.00</strong></div>
+          </div>
+          <div class="bet-note">Payout updates from the odds shown on the button you clicked.</div>
+        `;
+        card.appendChild(slip);
+
+        slip.querySelector('.bet-close').addEventListener('click', () => {
+          slip.remove();
+          card.querySelectorAll('.odds-btn').forEach(btn => btn.classList.remove('active'));
+        });
+      }
+
+      return slip;
+    }
+
+    document.querySelectorAll('.market-card').forEach(card => {
+      const oddsButtons = card.querySelectorAll('.odds-btn');
+
+      oddsButtons.forEach(button => {
+        button.addEventListener('click', () => {
+          const slip = ensureBetSlip(card);
+          const stakeInput = slip.querySelector('.bet-stake');
+          const payoutText = slip.querySelector('.bet-payout');
+          const profitText = slip.querySelector('.bet-profit');
+          const multiplier = parseMultiplier(button);
+
+          oddsButtons.forEach(btn => btn.classList.remove('active'));
+          button.classList.add('active');
+
+          const updateTotals = () => {
+            const stake = Number(stakeInput.value);
+            if (!Number.isFinite(stake) || stake <= 0) {
+              payoutText.textContent = 'KSh 0.00';
+              profitText.textContent = 'KSh 0.00';
+              return;
+            }
+
+            const payout = stake * multiplier;
+            const profit = payout - stake;
+            payoutText.textContent = formatCurrency(payout);
+            profitText.textContent = formatCurrency(profit);
+          };
+
+          stakeInput.value = stakeInput.value || '100';
+          stakeInput.oninput = updateTotals;
+          updateTotals();
+          stakeInput.focus();
+          stakeInput.select();
+        });
+      });
+    });
   }
 
   /* ================================================
