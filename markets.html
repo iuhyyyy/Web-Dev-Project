@@ -324,6 +324,65 @@
       gap: 0.5rem;
     }
 
+    .bet-slip {
+      margin-top: 0.9rem;
+      padding: 0.9rem;
+      border: 1px solid var(--clr-border);
+      border-radius: 14px;
+      background: rgba(255, 255, 255, 0.03);
+    }
+
+    .bet-slip-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 0.75rem;
+      margin-bottom: 0.65rem;
+      font-size: 0.82rem;
+      color: var(--clr-muted);
+      font-weight: 600;
+    }
+
+    .bet-slip input {
+      width: 100%;
+      border: 1px solid var(--clr-border);
+      background: rgba(7, 17, 29, 0.7);
+      color: var(--clr-text);
+      border-radius: 12px;
+      padding: 0.65rem 0.8rem;
+      outline: none;
+      font-size: 0.95rem;
+    }
+
+    .bet-slip input:focus {
+      border-color: rgba(96, 165, 250, 0.55);
+      box-shadow: 0 0 0 3px rgba(96, 165, 250, 0.12);
+    }
+
+    .bet-summary {
+      margin-top: 0.75rem;
+      display: grid;
+      gap: 0.35rem;
+      font-size: 0.84rem;
+      color: var(--clr-muted);
+    }
+
+    .bet-summary strong {
+      color: var(--clr-text);
+      font-size: 1rem;
+    }
+
+    .bet-note {
+      margin-top: 0.55rem;
+      font-size: 0.78rem;
+      color: var(--clr-muted);
+    }
+
+    .odds-btn.active {
+      transform: translateY(-1px);
+      box-shadow: 0 0 0 2px rgba(96, 165, 250, 0.18);
+    }
+
     .btn-primary-custom {
       background: linear-gradient(135deg, #60a5fa, #3b82f6);
       color: #fff;
@@ -813,6 +872,28 @@
       nav.style.setProperty('display', nav.style.display === 'flex' ? 'none' : 'flex', 'important');
       nav.style.flexDirection = 'column';
     });
+  </script>
+  <script>
+    // Inject stake UI into every market card (added as part of stake/payout feature)
+    (function () {
+      const betHtml = `
+        <div class="bet-slip" style="display:none;" aria-hidden="true">
+          <div class="bet-slip-header">
+            <label class="form-label-custom">Stake</label>
+            <span class="text-muted-custom">Projected payout</span>
+          </div>
+          <input type="number" class="bet-stake form-control-custom" min="0" step="0.01" placeholder="Amount" aria-label="Stake amount">
+          <div class="bet-summary">
+            <div>Payout: <strong class="bet-payout">0.00</strong></div>
+          </div>
+        </div>`;
+
+      document.querySelectorAll('.market-card').forEach(card => {
+        if (!card.querySelector('.bet-slip')) {
+          card.insertAdjacentHTML('beforeend', betHtml);
+        }
+      });
+    })();
   </script>
 </body>
 
