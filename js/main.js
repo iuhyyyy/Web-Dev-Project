@@ -62,7 +62,6 @@ document.addEventListener('DOMContentLoaded', () => {
   }
 
  
-
   /* ================================================
      FEATURE 2: Contact form validation (contact.html)
      ================================================ */
