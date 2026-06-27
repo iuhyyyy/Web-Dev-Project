@@ -2,6 +2,7 @@
    Predikt — main.js
    Feature 1: Live search + category filter (markets.html)
    Feature 2: Contact form validation (contact.html)
+   Feature 3: Stake calculator on all market cards
    ============================================= */
 
 document.addEventListener('DOMContentLoaded', () => {
@@ -15,7 +16,7 @@ document.addEventListener('DOMContentLoaded', () => {
   });
 
   /* ================================================
-     FEATURE 1: Live search + filter on markets.html
+     FEATURE 1: Live search + filter (markets.html)
      ================================================ */
   const searchInput = document.getElementById('market-search');
   const categoryBtns = document.querySelectorAll('.filter-btn');
@@ -58,86 +59,109 @@ document.addEventListener('DOMContentLoaded', () => {
         filterMarkets();
       });
     });
-
-    function parseMultiplier(button) {
-      const match = button.textContent.match(/([0-9]+(?:\.[0-9]+)?)×/);
-      return match ? Number(match[1]) : 1;
-    }
-
-    function formatCurrency(value) {
-      return `KSh ${value.toFixed(2)}`;
-    }
-
-    function ensureBetSlip(card) {
-      let slip = card.querySelector('.bet-slip');
-
-      if (!slip) {
-        slip = document.createElement('div');
-        slip.className = 'bet-slip';
-        slip.innerHTML = `
-          <div class="bet-slip-header">
-            <span>Stake calculator</span>
-            <button type="button" class="btn btn-sm btn-outline-secondary bet-close" style="border-radius:999px; font-size:0.75rem; padding:0.2rem 0.65rem;">Close</button>
-          </div>
-          <label class="form-label" style="font-size:0.8rem; color:var(--clr-muted); margin-bottom:0.35rem;">Stake amount</label>
-          <input type="number" min="1" step="1" class="bet-stake" placeholder="Enter amount" />
-          <div class="bet-summary">
-            <div><span>Potential payout:</span> <strong class="bet-payout">KSh 0.00</strong></div>
-            <div><span>Potential profit:</span> <strong class="bet-profit">KSh 0.00</strong></div>
-          </div>
-          <div class="bet-note">Payout updates from the odds shown on the button you clicked.</div>
-        `;
-        card.appendChild(slip);
-
-        slip.querySelector('.bet-close').addEventListener('click', () => {
-          slip.remove();
-          card.querySelectorAll('.odds-btn').forEach(btn => btn.classList.remove('active'));
-        });
-      }
-
-      return slip;
-    }
-
-    document.querySelectorAll('.market-card').forEach(card => {
-      const oddsButtons = card.querySelectorAll('.odds-btn');
-
-      oddsButtons.forEach(button => {
-        button.addEventListener('click', () => {
-          const slip = ensureBetSlip(card);
-          const stakeInput = slip.querySelector('.bet-stake');
-          const payoutText = slip.querySelector('.bet-payout');
-          const profitText = slip.querySelector('.bet-profit');
-          const multiplier = parseMultiplier(button);
-
-          oddsButtons.forEach(btn => btn.classList.remove('active'));
-          button.classList.add('active');
-
-          const updateTotals = () => {
-            const stake = Number(stakeInput.value);
-            if (!Number.isFinite(stake) || stake <= 0) {
-              payoutText.textContent = 'KSh 0.00';
-              profitText.textContent = 'KSh 0.00';
-              return;
-            }
-
-            const payout = stake * multiplier;
-            const profit = payout - stake;
-            payoutText.textContent = formatCurrency(payout);
-            profitText.textContent = formatCurrency(profit);
-          };
-
-          stakeInput.value = stakeInput.value || '100';
-          stakeInput.oninput = updateTotals;
-          updateTotals();
-          stakeInput.focus();
-          stakeInput.select();
-        });
-      });
-    });
   }
 
   /* ================================================
-     FEATURE 2: Contact form validation
+     FEATURE 3: Stake calculator on all market cards
+     Runs on any page that has .market-card elements
+     ================================================ */
+
+  function getMultiplier(btn) {
+    const match = btn.textContent.match(/([0-9]+(?:\.[0-9]+)?)\s*×/);
+    return match ? parseFloat(match[1]) : 1;
+  }
+
+  function buildSlip(card) {
+    // Don't add twice
+    if (card.querySelector('.bet-slip')) return;
+
+    const slip = document.createElement('div');
+    slip.className = 'bet-slip';
+    slip.style.cssText = `
+      display: none;
+      margin-top: 0.75rem;
+      background: rgba(10,19,32,0.9);
+      border: 1px solid rgba(148,163,184,0.16);
+      border-radius: 12px;
+      padding: 0.9rem;
+    `;
+    slip.innerHTML = `
+      <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:0.6rem;">
+        <span style="font-size:0.82rem; font-weight:700; color:#f8fafc;">Stake calculator</span>
+        <button class="slip-close" style="background:transparent; border:none; color:#94a3b8; font-size:1rem; cursor:pointer; line-height:1;">✕</button>
+      </div>
+      <input
+        type="number"
+        class="slip-stake"
+        min="1"
+        step="1"
+        placeholder="Enter amount (KSh)"
+        style="width:100%; background:rgba(15,27,43,0.9); border:1px solid rgba(148,163,184,0.16); border-radius:8px; color:#f8fafc; padding:0.5rem 0.75rem; font-size:0.9rem; outline:none; margin-bottom:0.6rem;"
+      />
+      <div style="font-size:0.85rem; color:#94a3b8; display:flex; flex-direction:column; gap:0.25rem;">
+        <div>Potential payout: <strong class="slip-payout" style="color:#4ade80;">KSh 0.00</strong></div>
+        <div>Potential profit: <strong class="slip-profit" style="color:#4ade80;">KSh 0.00</strong></div>
+      </div>
+    `;
+    card.appendChild(slip);
+
+    // Close button
+    slip.querySelector('.slip-close').addEventListener('click', () => {
+      slip.style.display = 'none';
+      card.querySelectorAll('.odds-btn').forEach(b => b.classList.remove('active'));
+    });
+  }
+
+  // Init calculator on every market card on this page
+  document.querySelectorAll('.market-card').forEach(card => {
+    buildSlip(card);
+
+    card.querySelectorAll('.odds-btn').forEach(btn => {
+      btn.addEventListener('click', () => {
+        const slip = card.querySelector('.bet-slip');
+        if (!slip) return;
+
+        // Toggle: clicking same active button closes the slip
+        const alreadyActive = btn.classList.contains('active');
+        card.querySelectorAll('.odds-btn').forEach(b => b.classList.remove('active'));
+
+        if (alreadyActive) {
+          slip.style.display = 'none';
+          return;
+        }
+
+        btn.classList.add('active');
+        slip.style.display = 'block';
+
+        const multiplier = getMultiplier(btn);
+        const stakeInput = slip.querySelector('.slip-stake');
+        const payoutEl = slip.querySelector('.slip-payout');
+        const profitEl = slip.querySelector('.slip-profit');
+
+        function calculate() {
+          const stake = parseFloat(stakeInput.value);
+          if (!stake || stake <= 0) {
+            payoutEl.textContent = 'KSh 0.00';
+            profitEl.textContent = 'KSh 0.00';
+            return;
+          }
+          const payout = stake * multiplier;
+          const profit = payout - stake;
+          payoutEl.textContent = `KSh ${payout.toFixed(2)}`;
+          profitEl.textContent = `KSh ${profit.toFixed(2)}`;
+        }
+
+        stakeInput.addEventListener('input', calculate);
+
+        // If user already had a stake typed, recalculate for new odds
+        calculate();
+        stakeInput.focus();
+      });
+    });
+  });
+
+  /* ================================================
+     FEATURE 2: Contact form validation (contact.html)
      ================================================ */
   const contactForm = document.getElementById('contact-form');
 
@@ -202,7 +226,6 @@ document.addEventListener('DOMContentLoaded', () => {
       }
     });
 
-    /* Clear errors on input */
     ['name', 'email', 'message'].forEach(id => {
       const el = document.getElementById(id);
       if (el) el.addEventListener('input', () => clearError(id));
