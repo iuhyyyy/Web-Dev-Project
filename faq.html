@@ -79,7 +79,7 @@
         }
 
         img {
-            max-width: 100%;
+            max-width: 18%;
             display: block;
         }
 
@@ -425,6 +425,28 @@
                 flex-direction: column;
             }
         }
+        /* ---- FAQ items ---- */
+        .faq-item {
+            padding: 1.25rem 0;
+            border-bottom: 1px solid var(--clr-border);
+        }
+
+        .faq-q {
+            font-size: 0.95rem;
+            font-weight: 700;
+            color: var(--clr-text);
+            margin-bottom: 0.4rem;
+        }
+
+        .faq-a {
+            font-size: 0.88rem;
+            color: var(--clr-muted);
+            line-height: 1.7;
+        }
+
+        .faq-a a {
+            color: var(--clr-accent);
+        }
     </style>
 </head>
 
@@ -470,56 +492,47 @@
 
     <section class="section-pad">
         <div class="container">
-            <div class="row">
-                <div class="col-lg-8">
+            <div class="row justify-content-center">
+                <div class="col-lg-7">
 
-                    <div class="market-card mb-3">
-                        <h3 style="font-size:1rem; margin-bottom:0.5rem;">Is real money involved?</h3>
-                        <p style="color:var(--clr-muted); font-size:0.9rem; margin:0;">
-                            No. Predikt uses points only. There is no deposit, withdrawal, or real-money wagering of any
-                            kind.
-                        </p>
+                    <div class="faq-item">
+                        <div class="faq-q">Is real money involved?</div>
+                        <div class="faq-a">No. Predikt uses points only. There is no deposit, withdrawal, or real-money wagering of any kind.</div>
                     </div>
 
-                    <div class="market-card mb-3">
-                        <h3 style="font-size:1rem; margin-bottom:0.5rem;">How are odds calculated?</h3>
-                        <p style="color:var(--clr-muted); font-size:0.9rem; margin:0;">
-                            Odds are fixed at the moment you place a prediction and reflect the current community split
-                            between Yes and No. The multiplier shown is what you'll earn per point if you're correct.
-                        </p>
+                    <div class="faq-item">
+                        <div class="faq-q">How are odds calculated?</div>
+                        <div class="faq-a">Odds are fixed at the moment you place a prediction and reflect the current community split between Yes and No. The multiplier shown is what you'll earn per point if you're correct.</div>
                     </div>
 
-                    <div class="market-card mb-3">
-                        <h3 style="font-size:1rem; margin-bottom:0.5rem;">How do I earn points?</h3>
-                        <p style="color:var(--clr-muted); font-size:0.9rem; margin:0;">
-                            New users start with a fixed point balance. Correct predictions add points based on the
-                            market's odds at the time you predicted; incorrect predictions subtract your staked points.
-                        </p>
+                    <div class="faq-item">
+                        <div class="faq-q">How do I earn points?</div>
+                        <div class="faq-a">New users start with a fixed point balance. Correct predictions add points based on the market's odds at the time you predicted; incorrect predictions subtract your staked points.</div>
                     </div>
 
-                    <div class="market-card mb-3">
-                        <h3 style="font-size:1rem; margin-bottom:0.5rem;">Who decides how a market resolves?</h3>
-                        <p style="color:var(--clr-muted); font-size:0.9rem; margin:0;">
-                            Each market lists a resolution source on its detail page — typically an official
-                            announcement,
-                            news outlet, or public dataset — so outcomes are verifiable and not subject to opinion.
-                        </p>
+                    <div class="faq-item">
+                        <div class="faq-q">Who decides how a market resolves?</div>
+                        <div class="faq-a">Each market lists a resolution source on its detail page — typically an official announcement, news outlet, or public dataset — so outcomes are verifiable and not subject to opinion.</div>
                     </div>
 
-                    <div class="market-card mb-3">
-                        <h3 style="font-size:1rem; margin-bottom:0.5rem;">Can I suggest a new market?</h3>
-                        <p style="color:var(--clr-muted); font-size:0.9rem; margin:0;">
-                            Yes — use the <a href="contact.html">contact page</a> to send a market suggestion. Include a
-                            clear resolution date and source so it can be reviewed quickly.
-                        </p>
+                    <div class="faq-item">
+                        <div class="faq-q">Can I suggest a new market?</div>
+                        <div class="faq-a">Yes — use the <a href="contact.html">contact page</a> to send a market suggestion. Include a clear resolution date and source so it can be reviewed quickly.</div>
                     </div>
 
-                    <div class="market-card">
-                        <h3 style="font-size:1rem; margin-bottom:0.5rem;">Is Predikt available on mobile?</h3>
-                        <p style="color:var(--clr-muted); font-size:0.9rem; margin:0;">
-                            The site is fully responsive and works on any modern mobile browser. A dedicated app may
-                            follow in a future release.
-                        </p>
+                    <div class="faq-item">
+                        <div class="faq-q">Is Predikt available on mobile?</div>
+                        <div class="faq-a">The site is fully responsive and works on any modern mobile browser. A dedicated app may follow in a future release.</div>
+                    </div>
+
+                    <div class="faq-item">
+                        <div class="faq-q">How do I know a market resolved correctly?</div>
+                        <div class="faq-a">Every market lists its resolution source on the detail page. Results are posted within 48 hours of the closing date, with a link to the source used to determine the outcome.</div>
+                    </div>
+
+                    <div class="faq-item" style="border-bottom: none;">
+                        <div class="faq-q">Can I change my prediction after placing it?</div>
+                        <div class="faq-a">No — predictions are final once placed. This keeps the market fair for everyone and reflects real forecasting conditions where you commit to a view at a point in time.</div>
                     </div>
 
                 </div>
